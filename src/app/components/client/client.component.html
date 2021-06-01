@@ -1,0 +1,39 @@
+<div class="card text-white bg-dark">
+  <div class="card-header">Clientes</div>
+  <div class="card-body text-primary">
+    <h5 class="card-title">Registros</h5>
+    <div class="my-2 text-left">
+      <button type="button" class="btn btn-rounded btn-primary" name="button" [routerLink] = "['/clients/form']">Agregar cliente</button>
+    </div>
+    <div class="alert alert-light my-4" role="alert" *ngIf="clients.length == 0">
+      No se encontró ningún registro
+    </div>
+    <table class="table table-bordered table-dark text-white" *ngIf="clients.length > 0">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Teléfono</th>
+          <th>Correo</th>
+          <th>Actualización</th>
+          <th>Registro</th>
+          <th>Editar</th>
+          <th>Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let client of clients">
+          <td>{{client.firstname}}</td>
+          <td>{{client.lastname}}</td>
+          <td>{{client.phone}}</td>
+          <td>{{client.email}}</td>
+          <td>{{client.updateAt}}</td>
+          <td>{{client.createAt}}</td>
+          <!-- [routerLink] = "['/clients/form']" -->
+          <td><button type="button" class="btn btn-sm btn-primary" [routerLink] = "['/clients/form',client.id]">Editar</button></td>
+          <td><button type="button" class="btn btn-sm btn-danger" (click) = "delete(client)">Eliminar</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

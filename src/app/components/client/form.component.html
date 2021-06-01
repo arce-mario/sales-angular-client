@@ -1,0 +1,62 @@
+<div class="card bg-dark text-white">
+  <div class="card-header{{title}}"></div>
+  <div class="card-body">
+
+    <div class="alert alert-danger" role="alert" *ngIf="backendErrors.length > 0">
+      <ul *ngFor="let err of backendErrors">
+        <li>{{err}}</li>
+      </ul>
+    </div>
+
+    <form #clientForm="ngForm">
+      <fieldset class="form-group row">
+        <label for="name" class="col-form-label col-sm-2">Nombre del cliente</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="client.firstname" name="firstname" required minlength="4" #firstname = "ngModel">
+          <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)">
+            <small class="form-text text-danger" *ngIf="firstname.errors?.required">Nombre es requerido</small>
+            <small class="form-text text-danger" *ngIf="firstname.errors?.minlength">El nombre no puede tener menos de 3 caracteres</small>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group row">
+        <label for="lastname" class="col-form-label col-sm-2">Apellidos</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="client.lastname" name="lastname" required minlength="4" #lastname = "ngModel">
+          <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)">
+            <small class="form-text text-danger" *ngIf="lastname.errors?.required">Apellido es requerido</small>
+            <small class="form-text text-danger" *ngIf="lastname.errors?.minlength">El apellido no puede tener menos de 3 caracteres</small>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group row">
+        <label for="email" class="col-form-label col-sm-2">Correo elctrónico</label>
+        <div class="col-sm-6">
+          <input type="email" class="form-control" [(ngModel)]="client.email" name="email" required email #email="ngModel">
+          <div *ngIf="email.invalid && (email.dirty || email.touched)">
+            <small class="form-text text-danger" *ngIf="lastname.errors?.incorrect">El correo electrónico debe ser válido</small>
+            <small class="form-text text-danger" *ngIf="lastname.errors?.required">El correo electrónico es requerido</small>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group row">
+        <label for="phone" class="col-form-label col-sm-2">Celular</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="client.phone" name="phone">
+        </div>
+      </fieldset>
+
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <button name="button" class="btn btn-primary" role="button" (click) = "create()" [disabled] = "!clientForm.form.valid" *ngIf="!client.id else elseBlock">Crear</button>
+          <ng-template #elseBlock>
+              <button name="button" class="btn btn-primary" role="button" (click) = "update()" [disabled] ="!clientForm.form.valid" >Editar</button>
+          </ng-template>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

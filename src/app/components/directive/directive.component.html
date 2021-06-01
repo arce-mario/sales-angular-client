@@ -1,0 +1,28 @@
+<div class="card text-white bg-dark">
+  <div class="card-header">Lista de cursos</div>
+  <div class="card-body">
+    <ul class="list-group">
+      <li class="list-group-item bg-dark" *ngFor="let course of courses">{{course}}</li>
+    </ul>
+  </div>
+</div>
+
+<button type="button" name="button" (click)= "isVisibleCard = !isVisibleCard"
+  class="btn btn-primary my-3">
+  {{(isVisibleCard == true)? 'Ocultar tabla': 'Mostrar tabla'}}
+</button>
+
+<div class="card text-white bg-dark" *ngIf="isVisibleCard">
+  <div class="card-header">
+    Lista de integrantes
+  </div>
+  <div class="card-body">
+    <ul class="list-group">
+      <li class="list-group-item bg-dark" *ngFor="let department of departments">
+        <strong>Nombre:</strong> {{department.name}} <br>
+        <strong>Correo electrónico:</strong> {{department.email}} <br>
+        <strong>Teléfono:</strong> {{department.phone}}
+      </li>
+    </ul>
+  </div>
+</div>
